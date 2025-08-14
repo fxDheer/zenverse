@@ -13,14 +13,14 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: process.env.CORS_ORIGIN || "http://localhost:3000",
     methods: ["GET", "POST"]
   }
 });
 
 // Middleware
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://127.0.0.1:3000'],
+  origin: process.env.CORS_ORIGIN || ['http://localhost:3000', 'http://127.0.0.1:3000'],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'x-auth-token']
@@ -82,6 +82,14 @@ app.use('/api/premium', premiumRoutes);
 
 // Serve static files (profile images)
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+// Serve React frontend
+app.use(express.static(path.join(__dirname, '../client/build')));
+
+// Catch all requests and serve React app
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+});
 
 // Initialize chat handler
 const ChatHandler = require('./sockets/chatHandler');
