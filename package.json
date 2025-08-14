@@ -1,6 +1,19 @@
 {
+  "name": "zenverse",
+  "version": "1.0.0",
+  "description": "ZenVerse Dating App - Full Stack",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "cd server && npm install && node server.js",
+    "build": "cd client && npm install && npm run build",
+    "dev": "cd server && npm run dev",
+    "seed": "cd server && npm run seed"
+  },
   "dependencies": {
     "axios": "^1.11.0",
     "socket.io-client": "^4.8.1"
+  },
+  "engines": {
+    "node": ">=16.0.0"
   }
 }
