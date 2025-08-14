@@ -4,8 +4,8 @@
   "description": "ZenVerse Dating App - Full Stack",
   "main": "server/server.js",
   "scripts": {
-    "start": "npm run build && cd server && npm install && node server.js",
-    "build": "cd client && npm install && npm run build",
+    "start": "npm run build && cd server && npm ci --production && node server.js",
+    "build": "cd client && npm ci --production && npm run build:prod",
     "dev": "cd server && npm run dev",
     "seed": "cd server && npm run seed"
   },
