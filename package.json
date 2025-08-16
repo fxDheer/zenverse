@@ -5,7 +5,8 @@
   "main": "server/server.js",
   "scripts": {
     "start": "npm run build && cd server && npm ci --production && node server.js",
-    "build": "cd client && npm ci --production && npm run build",
+    "build": "cd client && npm ci --production --no-optional && GENERATE_SOURCEMAP=false CI=false npm run build",
+    "build:light": "cd client && npm ci --production --no-optional --no-audit --no-fund && GENERATE_SOURCEMAP=false CI=false SKIP_PREFLIGHT_CHECK=true npm run build",
     "dev": "cd server && npm run dev",
     "seed": "cd server && npm run seed"
   },
